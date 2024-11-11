@@ -12,7 +12,7 @@ To build a typical Kilua application you should have some tools installed on you
 
 * [JDK](https://jdk.java.net/) 17
 * [Git](https://git-scm.com) (with additional UNIX tools if using Windows)
-* GNU [xgettext](https://www.gnu.org/software/gettext) and [msgmerge](https://www.gnu.org/software/gettext) utilities to use [Internationalization](broken-reference) features   &#x20;
+* GNU [xgettext](https://www.gnu.org/software/gettext) and [msgmerge](https://www.gnu.org/software/gettext) utilities to use internationalization features   &#x20;
 
 {% hint style="info" %}
 Note: Make sure you are building Kilua applications on the local file system. &#x20;
