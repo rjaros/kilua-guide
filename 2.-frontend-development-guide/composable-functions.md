@@ -39,14 +39,32 @@ fun IComponent.alert(text: String, className: String?, content: @Composable IDiv
 
 ## Entry points
 
-You can use (a non-compsable) `root()` function to start a composition tree. The first argument of this function should be an ID attribute of HTML tag, which must be present in the main `index.html` file, or a direct reference to some HTML element.
+You can use (a non-compsable) `root()` function to start a composition tree. The first argument of this function should be an ID attribute of HTML tag, which must be present in the main `index.html` file.
 
+{% code title="App.kt" %}
 ```kotlin
 root("root") {
     div {
     }
 }
+```
+{% endcode %}
 
+{% code title="index.html" %}
+```html
+<!DOCTYPE html>
+<html>
+...
+<body>
+<div id="root"></div>
+</body>
+</html>
+```
+{% endcode %}
+
+You can also use a direct reference to some HTML element instead of an ID attribute, which might be useful when integrating external JavaScript components.
+
+```kotlin
 val element = document.createElement("div").also { document.body?.appendChild(it) }
 root(element) {
     div {
