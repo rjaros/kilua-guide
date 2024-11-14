@@ -34,6 +34,6 @@ Compose web is the name of that part of Compose Multiplatform which targets both
 
 ## Compose HTML
 
-Compose HTML is a separate library, which is developed by JetBrains as part of Compose Multiplatform Github repository. It allows you to build web applications with Kotlin/Js compiler and compose runtime. Compose HTML apps are rendered with native DOM elements. Being a kind of predecessor of Compose Web, it gained its own extensions and ecosystem (with an impressive [Kobweb](https://kobweb.varabyte.com/) framework at the forefront). Compose HTML is not Compose Web - it can't be used as cross-platform and you can't use Compose Web components with Compose HTML. &#x20;
+Compose HTML is a separate library, which is developed by JetBrains as part of Compose Multiplatform Github repository. It allows you to build web applications with Kotlin/Js compiler and compose runtime. Compose HTML apps are rendered with native DOM elements. Being a kind of predecessor of Compose Web, it gained its own extensions and ecosystem (with an impressive [Kobweb](https://kobweb.varabyte.com/) framework at the forefront). Compose HTML is not Compose Web - it can't be used cross-platform and you can't use Compose Web components with Compose HTML. &#x20;
 
 **Kilua is a bit similar to Compose HTML. You can think of it as a total rewrite of Compose HTML, with a new API and some unique features - mainly WasmJs support and Server Side Rendering (SSR). Still Kilua is not Compose HTML - you can't share components and can't use Kilua together with Compose HTML (or Kobweb).**&#x20;
