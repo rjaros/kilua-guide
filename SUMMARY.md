@@ -2,6 +2,7 @@
 
 * [Kilua Guide](README.md)
 * [Introduction](introduction.md)
+* [Compose world](compose-world.md)
 * [1. Getting Started](1.-getting-started-1/README.md)
   * [Setting Up](1.-getting-started-1/setting-up.md)
   * [Modules](1.-getting-started-1/modules.md)
