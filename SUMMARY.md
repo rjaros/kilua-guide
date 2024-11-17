@@ -16,6 +16,7 @@
   * [Browser APIs](2.-frontend-development-guide/browser-apis.md)
   * [Interoperability with JavaScript](2.-frontend-development-guide/interoperability-with-javascript.md)
   * [Working with Compose](2.-frontend-development-guide/working-with-compose.md)
+  * [Rendering HTML](2.-frontend-development-guide/rendering-html.md)
   * [Type-safe CSS properties](2.-frontend-development-guide/type-safe-css-properties.md)
 * [3. Fullstack Components](3.-fullstack-components.md)
 * [Useful References](useful-references.md)
