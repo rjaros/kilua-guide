@@ -39,8 +39,24 @@ val someObject: Test = obj<Test> {
     field2 = 1
 }
 
-val jsObject: JsAny = jsObjectOf("field1" to "test", "field2" to 1)
+val map = mapOf("field1" to "test", "field2" to 1)
+
+val jsObject1: JsAny = map.toJsAny()
+
+val jsObject2: JsAny = jsObjectOf(
+    "a" to mapOf(
+        "b" to mapOf(
+            "c" to "c",
+            "d" to "d"
+        ),
+        "array" to listOf(1, 2)
+    ),
+    "isCorrect" to true,
+    "pi" to 3.14
+)
 ```
+
+The `toJsAny()` extension and `jsObjectOf()` function support all basic Kotlin types - `String`, `Int`, `Double`, `Boolean`, `Array<*>`, `List<*>` and `Map<*,*>` and also support complex types.
 
 ## Importing modules and resources
 
