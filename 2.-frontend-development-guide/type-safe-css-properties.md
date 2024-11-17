@@ -33,3 +33,91 @@ div {
     color(Color("blue"))
 }
 ```
+
+## CSS helper classes
+
+To specify borders, backgrounds, text decorations, text shadows, box shadows, transitions and list styles you use the dedicated classes.
+
+```kotlin
+div {
+    border(Border(1.px, BorderStyle.Solid, Color.Black))
+    background(
+        Background(
+            Color.hex(0xcccccc),
+            "img/kotlin.png",
+            50.perc,
+            50.perc,
+            size = BgSize.Contain,
+            repeat = BgRepeat.NoRepeat,
+            attachment = BgAttach.Fixed
+        )
+    )
+    textDecoration(
+        TextDecoration(TextDecorationLine.Underline, TextDecorationStyle.Dotted, Color.Red)
+    )
+    textShadow(TextShadow(2.px, 2.px, blurRadius = 1.px, color = Color.Black))
+    boxShadow(BoxShadow(2.px, 2.px, blurRadius = 1.px, spreadRadius = 1.px, color = Color.Black))
+}
+```
+
+## Style functions
+
+When the CSS properties are set directly inside the component, the corresponding style attributes are inlined in the generated HTML code. Sometimes it's better to define a CSS class, which can be reused by other parts of the UI. In Kilua you can do this by using the `style()` function. It creates a CSS class which can be used by other components.
+
+```kotlin
+val myStyle = style {
+    border(Border(1.px, BorderStyle.Solid, Color.Gray))
+    width(200.px)
+    height(200.px)
+    margin(10.px)
+}
+div(myStyle) {
+    +"A div with custom CSS styling"
+}
+div(myStyle) {
+    +"Another div with custom CSS styling"
+}
+```
+
+By default the class name is automatically generated, but you can use your own with optional parameters.
+
+```kotlin
+val rectangleClass = style(".rectangle") {
+    width(200.px)
+    height(100.px)
+}
+
+div(rectangleClass) {
+    +"A rectangle"
+}
+```
+
+Styles can also be nested to create CSS subclasses.
+
+```kotlin
+val boxStyle = style {
+    border(Border(1.px, BorderStyle.Solid, Color.Gray))
+    width(200.px)
+    height(200.px)
+
+    style("h1") {
+        color(Color.Blue)
+    }
+}
+div(boxStyle) {
+    h1 {
+        +"Header"
+    }
+}
+```
+
+You can also easily use CSS pseudo-classes or media queries.
+
+```kotlin
+val hover = style(pClass = PClass.Hover) {
+    color(Color.Yellowgreen)
+}
+div(hover) {
+    +"Hover me"
+}
+```
