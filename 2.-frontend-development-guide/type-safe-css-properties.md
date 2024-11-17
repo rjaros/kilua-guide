@@ -18,7 +18,7 @@ div {
 
 ## CSS units
 
-Kilua supports all CSS units as an extension properties on `Number` type. So you can specify dimensions, sizes, position and thickness with such example notations: `50.px`, `12.pt`, `2.em`, `90.perc`, `100.vh`, `1.49.em` etc.
+Kilua supports all CSS units as an extension properties on `Number` type. So you can specify dimensions, sizes, position and thickness with such example notations: `50.px`, `12.pt`, `2.em`, `90.perc`, `100.vh`, `1.49.em` etc. In addition `auto`, `normal`, `initial` and `inherit` values are also supported.
 
 ## Colors
 
