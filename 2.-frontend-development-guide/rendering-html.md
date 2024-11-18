@@ -9,7 +9,7 @@ Kilua provides many functions to render all standard HTML tags. Almost all of th
 * `<link>`, rendered with a `linkTag()` function (to avoid clash with the above)
 * `<map>`,  rendered with a `mapTag()` function (to avoid clash with Kotlin maps)
 * `<object>`,  rendered with an  `objectTag()` function (to avoid clash with Kotlin `object` keyword)
-* `<var>`, renderd with `varTag()` function (to avoid clash with Kotlin `var` keyword)
+* `<var>`, rendered with a `varTag()` function (to avoid clash with Kotlin `var` keyword)
 
 {% hint style="info" %}
 There is a dedicated `kilua-svg` module to render `<svg>` tags containing vector graphics.
