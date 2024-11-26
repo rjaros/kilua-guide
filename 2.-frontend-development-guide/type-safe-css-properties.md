@@ -18,7 +18,7 @@ div {
 
 ## Custom properties
 
-Not all CSS properties are supported with dedicated functions. Some, less frequently used, newly added to the specification or those whose values ​​cannot be easily described in a type-safe manner, can be used using the `style()` function with raw `String` parameters:
+Not all CSS properties are supported with dedicated functions. Some, less frequently used, newly added to the specification or those whose values ​​cannot be easily described in a type-safe manner, can be accessed using the `style()` function with raw `String` parameters:
 
 ```kotlin
 div {
