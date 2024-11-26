@@ -16,6 +16,18 @@ div {
 }
 ```
 
+## Custom properties
+
+Not all CSS properties are supported with dedicated functions. Some, less frequently used, newly added to the specification or those whose values ​​cannot be easily described in a type-safe manner, can be used using the `style()` function with raw `String` parameters:
+
+```kotlin
+div {
+    width(100.px)
+    height(100.px)
+    style("scale", "1.25 0.75")
+}
+```
+
 ## CSS units
 
 Kilua supports all CSS units as an extension properties on `Number` type. So you can specify dimensions, sizes, position and thickness with such example notations: `50.px`, `12.pt`, `2.em`, `90.perc`, `100.vh`, `1.49.em` etc. In addition `auto`, `normal`, `initial` and `inherit` values are also supported.
@@ -60,7 +72,7 @@ div {
 }
 ```
 
-## Style functions
+## Global style functions
 
 When the CSS properties are set directly inside the component, the corresponding style attributes are inlined in the generated HTML code. Sometimes it's better to define a CSS class, which can be reused by other parts of the UI. In Kilua you can do this by using the `style()` function. It creates a CSS class which can be used by other components.
 
