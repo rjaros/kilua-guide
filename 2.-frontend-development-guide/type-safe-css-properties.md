@@ -48,7 +48,7 @@ div {
 
 ## CSS helper classes
 
-To specify borders, backgrounds, text decorations, text shadows, box shadows, transitions and list styles you use the dedicated classes.
+To specify borders, backgrounds, text decorations, text shadows, box shadows, transitions and list styles you can use the dedicated classes.
 
 ```kotlin
 div {
@@ -72,12 +72,39 @@ div {
 }
 ```
 
-## Global style functions
-
-When the CSS properties are set directly inside the component, the corresponding style attributes are inlined in the generated HTML code. Sometimes it's better to define a CSS class, which can be reused by other parts of the UI. In Kilua you can do this by using the `style()` function. It creates a CSS class which can be used by other components.
+There are also some extension functions declared, that can be imported to write the same code easier:
 
 ```kotlin
-val myStyle = style {
+import dev.kilua.html.helpers.TagStyleFun.Companion.background
+import dev.kilua.html.helpers.TagStyleFun.Companion.border
+import dev.kilua.html.helpers.TagStyleFun.Companion.textDecoration
+import dev.kilua.html.helpers.TagStyleFun.Companion.textShadow
+import dev.kilua.html.helpers.TagStyleFun.Companion.boxShadow
+
+div {
+    border(1.px, BorderStyle.Solid, Color.Black)
+    background(
+            Color.hex(0xcccccc),
+            "img/kotlin.png",
+            50.perc,
+            50.perc,
+            size = BgSize.Contain,
+            repeat = BgRepeat.NoRepeat,
+            attachment = BgAttach.Fixed
+    )
+    textDecoration(TextDecorationLine.Underline, TextDecorationStyle.Dotted, Color.Red)
+    textShadow(2.px, 2.px, blurRadius = 1.px, color = Color.Black)
+    boxShadow(2.px, 2.px, blurRadius = 1.px, spreadRadius = 1.px, color = Color.Black)
+}
+
+```
+
+## Global style functions
+
+When the CSS properties are set directly inside the component, the corresponding style attributes are inlined in the generated HTML code. Sometimes it's better to define a CSS class, which can be reused by other parts of the UI. In Kilua you can do this by using the `globalStyle()` function. It creates a CSS class which can be used by other components.
+
+```kotlin
+val myStyle = globalStyle {
     border(Border(1.px, BorderStyle.Solid, Color.Gray))
     width(200.px)
     height(200.px)
@@ -94,7 +121,7 @@ div(myStyle) {
 By default the class name is automatically generated, but you can use your own with optional parameters.
 
 ```kotlin
-val rectangleClass = style(".rectangle") {
+val rectangleClass = globalStyle(".rectangle") {
     width(200.px)
     height(100.px)
 }
@@ -104,10 +131,10 @@ div(rectangleClass) {
 }
 ```
 
-Styles can also be nested to create CSS subclasses.
+Styles can also be nested with a `style()`calls to create CSS subclasses.
 
 ```kotlin
-val boxStyle = style {
+val boxStyle = globalStyle {
     border(Border(1.px, BorderStyle.Solid, Color.Gray))
     width(200.px)
     height(200.px)
@@ -126,10 +153,31 @@ div(boxStyle) {
 You can also easily use CSS pseudo-classes or media queries.
 
 ```kotlin
-val hover = style(pClass = PClass.Hover) {
+val hover = globalStyle(pClass = PClass.Hover) {
     color(Color.Yellowgreen)
 }
 div(hover) {
     +"Hover me"
+}
+```
+
+## Local style functions
+
+Sometimes you want to create a style dedicated for a single component, but can't use inline styles because you need to use features only available in the CSS stylesheet (like pseudo classes, pseudo elements or media queries). You can generate a CSS rule and apply that rule to your component by using `style()`function.
+
+```kotlin
+range {
+    cursor(Cursor.Pointer)
+    style("accent-color", "red")
+    style {
+        style("appearance", "none")
+        background(Color.hex(0xdddddd))
+        pElement("-webkit-slider-thumb") {
+            style("appearance", "none")
+            width(20.px)
+            height(20.px)
+            background(Color.hex(0x8758ff))
+        }
+    }
 }
 ```
