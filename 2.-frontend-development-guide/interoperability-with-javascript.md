@@ -62,7 +62,7 @@ The `toJsAny()` extension and `jsObjectOf()` function support all basic Kotlin t
 
 Kilua applications are developed with `useEsModules()` configuration option to support ECMAScript modules. If you have worked with some other Kotlin/JS frameworks before, you might be familiar with the `require()` function, but Kilua configuration doesn't allow you to use it for importing modules. Instead you should use `@JsModule` annotation, which is also available as `dev.kilua.JsModule` for use in the common sources set. This annotation is used both for external NPM modules and local resources (like CSS files, images or translation files).
 
-Using NPM module:
+This is how you can use an example NPM module (JQuery):
 
 ```kotlin
 import dev.kilua.JsModule
@@ -81,52 +81,3 @@ external val jQuery: JQueryStatic
 @JsModule("jquery")
 external fun jQuery(selector: String): JQuery
 ```
-
-Using local CSS stylesheet:
-
-```kotlin
-import dev.kilua.JsModule
-import dev.kilua.useModule
-
-@JsModule("./modules/css/style.css")
-external object styleCss : JsAny
-
-class App : Application() {
-
-    init {
-        useModule(styleCss)
-    }
-
-    override fun start() {
-        // ...
-    }
-}
-```
-
-Using `@JsModule` annotation is not enough for Webpack bundler to actually import and include resources in your application, because such object is treated as unused and removed to optimize the bundle size. You can use the `useModule` function to inform Webpack you need this resource.
-
-Using local image file with a helper `LocalResource` class:
-
-```kotlin
-import dev.kilua.JsModule
-import dev.kilua.LocalResource
-
-@JsModule("./modules/img/cat.jpg")
-external object catJpg : LocalResource
-
-class App : Application() {
-
-    override fun start() {
-
-        root("root") {
-            div {
-                img(catJpg.url, alt = "A cat")
-            }
-        }
-    }
-}
-```
-
-{% hint style="info" %}
-It's recommended to use `resources/modules` directory for keeping your local resources imported with `@JsModule` annotation, because this particular directory is not copied to the final distribution destination folder (the files in this directory are usually processed by Webpack and included in the bundle or saved with a mangled names in root directory).
-{% endhint %}
