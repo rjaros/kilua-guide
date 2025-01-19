@@ -26,7 +26,6 @@
   * [Forms](2.-frontend-development-guide/forms.md)
   * [Form controls](2.-frontend-development-guide/form-controls.md)
   * [SVG images](2.-frontend-development-guide/svg-images.md)
-  * [Page](2.-frontend-development-guide/page.md)
   * [Drag and drop](2.-frontend-development-guide/drag-and-drop.md)
   * [Internationalization](2.-frontend-development-guide/internationalization.md)
   * [REST client](2.-frontend-development-guide/rest-client.md)
