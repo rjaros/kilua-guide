@@ -1,6 +1,6 @@
 # Layout containers
 
-Layout containers allow you to position your components in a different ways to create both simple and complex views. Different container types can be stacked together to achieve even the most sophisticated layouts. Built-in containers are available in the `dev.kilua.panel` package.
+Layout containers allow you to position your components in a different ways to create both simple and complex views. Different container functions can be stacked together to achieve even the most sophisticated layouts. Built-in containers are available in the `dev.kilua.panel` package.
 
 ## flexPanel
 
@@ -74,6 +74,41 @@ gridPanel(columnGap = 5.px, rowGap = 5.px, justifyItems = JustifyItems.Center) {
     div {
         gridArea("auto")
         +"Component 2, 2"
+    }
+}
+```
+
+## splitPanel
+
+{% hint style="info" %}
+The `splitPanel` function is included in the `kilua-splitjs` module.
+{% endhint %}
+
+The `splitPanel` composable function divides the available space into two areas and provides a possibility to resize the panes by the user. Both directions (vertical and horizontal) are supported.
+
+```kotlin
+splitPanel {
+    width(300.px)
+    height(300.px)
+    left {
+        width(50.perc)
+        pt("First panel")
+    }
+    right {
+        width(50.perc)
+        pt("Second panel")
+    }
+}
+splitPanel(dir = Dir.Horizontal) {
+    width(300.px)
+    height(300.px)
+    top {
+        height(50.perc)
+        pt("First panel")
+    }
+    bottom {
+        height(50.perc)
+        pt("Second panel")
     }
 }
 ```
