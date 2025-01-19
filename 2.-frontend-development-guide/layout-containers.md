@@ -81,7 +81,7 @@ gridPanel(columnGap = 5.px, rowGap = 5.px, justifyItems = JustifyItems.Center) {
 ## splitPanel
 
 {% hint style="info" %}
-The `splitPanel` function is included in the `kilua-splitjs` module.
+The `splitPanel` function is defined in the `kilua-splitjs` module.
 {% endhint %}
 
 The `splitPanel` composable function divides the available space into two areas and provides a possibility to resize the panes by the user. Both directions (vertical and horizontal) are supported.
@@ -109,6 +109,38 @@ splitPanel(dir = Dir.Horizontal) {
     bottom {
         height(50.perc)
         pt("Second panel")
+    }
+}
+```
+
+## lazyRow, lazyColumn
+
+{% hint style="info" %}
+The `lazyRow` and `lazyColumn` functions are defined in the `kilua-lazy-layouts` module.
+{% endhint %}
+
+The `lazyRow` and `lazyColumn` composable functions are ported from the [Lazy layouts for Compose HTML](https://gitlab.com/opensavvy/ui/compose-lazy-html) project. The functions allow displaying large amounts of information by only loading the items that are necessary.
+
+```kotlin
+div {
+    border(1.px, style = BorderStyle.Solid, color = Color.Red)
+    height(100.px)
+    width(600.px)
+    overflowY(Overflow.Hidden)
+    overflowX(Overflow.Auto)
+    lazyRow({
+        height(100.px)
+        columnGap(2.px)
+        alignItems(AlignItems.Center)
+    }) {
+        items(200) {
+            div {
+                width(30.px)
+                height(30.px)
+                border(1.px, BorderStyle.Solid, Color.Black)
+                +"$it"
+            }
+        }
     }
 }
 ```
