@@ -144,3 +144,7 @@ div {
     }
 }
 ```
+
+## Bootstrap containers
+
+Additional, Bootstrap based composables, including `accordeon`, `carousel`, `offcanvas` and `tabPanel` are available in the [`kilua-bootstrap`](using-bootstrap.md) module.

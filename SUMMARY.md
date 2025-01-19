@@ -27,5 +27,7 @@
   * [Page](2.-frontend-development-guide/page.md)
   * [Drag and drop](2.-frontend-development-guide/drag-and-drop.md)
   * [Internationalization](2.-frontend-development-guide/internationalization.md)
+  * [Using Bootstrap](2.-frontend-development-guide/using-bootstrap.md)
+  * [Using TailwindCSS](2.-frontend-development-guide/using-tailwindcss.md)
 * [3. Fullstack Components](3.-fullstack-components.md)
 * [Useful References](useful-references.md)
