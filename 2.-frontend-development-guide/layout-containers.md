@@ -148,3 +148,7 @@ div {
 ## Bootstrap containers
 
 Additional, Bootstrap based composables, including `accordeon`, `carousel`, `offcanvas` and `tabPanel` are available in the [`kilua-bootstrap`](using-bootstrap.md) module.
+
+## Jetpack containers
+
+Additional Jetpack-like composables, including `Box`, `Row` and `Column` are available in the [`kilua-jetpack`](using-jetpack-compose-api.md)module.

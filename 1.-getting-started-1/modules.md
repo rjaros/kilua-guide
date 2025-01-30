@@ -32,6 +32,7 @@ This is the current list of available modules.
 | kilua-fontawesome            | [Font Awesome](https://fontawesome.com) support.                                                          |
 | kilua-i18n                   | Internationalization support.                                                                             |
 | kilua-imask                  | Text input mask support powered by [Imask.js](https://imask.js.org/)                                      |
+| kilua-jetpack                | Jetpack-like API (`Modifier`, `Box`, `Row`, `Column`)                                                     |
 | kilua-lazy-layouts           | `LazyRow` and `LazyColumn` implementations.                                                               |
 | kilua-marked                 | Markdown parser powered by [marked](https://marked.js.org/) library.                                      |
 | kilua-rest                   | Configurable REST/HTTP client.                                                                            |

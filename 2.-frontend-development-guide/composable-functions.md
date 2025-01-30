@@ -20,7 +20,7 @@ fun IComponent.mobileMenu(className: String) {
 }
 ```
 
-When using composable functions provided by Kilua you will notice that most important and most often used attributes and properties are exposed directly as function parameters. For all other HTML properties Kilua uses very simple DSL. Unlike some other Compose-based UI frameworks it does not introduce concepts like Modifiers or Attribute builders. Instead, all HTML properties, attributes and CSS styles are managed by type-safe functions available directly in the component body (which is also an extension on the component type interface).&#x20;
+When using composable functions provided by Kilua you will notice that most important and most often used attributes and properties are exposed directly as function parameters. For all other HTML properties Kilua uses very simple DSL. Unlike some other Compose-based UI frameworks by default it does not introduce concepts like Modifiers or Attribute builders. Instead, all HTML properties, attributes and CSS styles are managed by type-safe functions available directly in the component body (which is also an extension on the component type interface).&#x20;
 
 ```kotlin
 @Composable
@@ -36,6 +36,8 @@ fun IComponent.alert(text: String, className: String?, content: @Composable IDiv
     }
 }
 ```
+
+However, if you are familiar with Jetpack Compose you can use `kilua-jetpack`module, which contains an implementation of Jetpack-like layout composables, including `Box`, `Row` and `Column`. It also let's you use `Modifier` to set HTML properties and CSS styles.
 
 ## Entry points
 
