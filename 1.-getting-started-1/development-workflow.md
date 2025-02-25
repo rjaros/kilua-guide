@@ -3,10 +3,10 @@
 To run the application with Gradle continuous build, enter one of these commands:
 
 ```
-./gradlew -t jsRun                                    (run Js target on Linux)
-./gradlew -t wasmJsRun                                (run WasmJs target on Linux)
-gradlew.bat -t jsRun                                  (run Js target on Windows)
-gradlew.bat -t wasmJsRun                              (run WasmJs target on Windows)
+./gradlew -t jsBrowserDevelopmentRun                     (run Js target on Linux)
+./gradlew -t wasmJsBrowserDevelopmentRun                 (run WasmJs target on Linux)
+gradlew.bat -t jsBrowserDevelopmentRun                   (run Js target on Windows)
+gradlew.bat -t wasmJsBrowserDevelopmentRun               (run WasmJs target on Windows)
 ```
 
 {% hint style="info" %}
