@@ -27,6 +27,7 @@ This is the current list of available modules.
 | Module                       | Description                                                                                               |
 | ---------------------------- | --------------------------------------------------------------------------------------------------------- |
 | kilua                        | Core module required for all applications.                                                                |
+| kilua-animation              | Composable functions for animations powered by CSS and [Motion](https://motion.dev/) library.             |
 | kilua-bootstrap              | [Bootstrap](https://getbootstrap.com/) based components.                                                  |
 | kilua-bootstrap-icons        | [Bootstrap Icons](https://icons.getbootstrap.com/) support.                                               |
 | kilua-fontawesome            | [Font Awesome](https://fontawesome.com) support.                                                          |

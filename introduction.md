@@ -25,7 +25,8 @@ Kilua gives you a lot of ready to use GUI components, which can be used as build
 * modals including ready to use alerts and confirm dialogs
 * configurable toasts
 * theme switcher for dark mode with auto-detection
-* optional Jetpack-like API including `Modifier`, `Box`, `Row` and `Column`.
+* optional Jetpack-like API including `Modifier`, `Box`, `Row` and `Column`
+* animation module powered by CSS and [Motion](https://motion.dev/) library
 * built-in support for [Font Awesome](https://fontawesome.com/) icons
 * built-in support for [Bootstrap Icons](https://icons.getbootstrap.com/)
 
