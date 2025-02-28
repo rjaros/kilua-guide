@@ -1,6 +1,6 @@
 # Hot Module Replacement
 
-When developing with Js target you can use the HMR (Hot Module Replacement) feature of [Webpack](https://webpack.js.org/concepts/hot-module-replacement/). HMR can significantly speed up development by updating browser content automatically after changes are made in the source code. It also allows you to retain the state of the application. Just override the `start` method with a `state` parameter.
+When developing with Js target you can use the HMR (Hot Module Replacement) feature of [Webpack](https://webpack.js.org/concepts/hot-module-replacement/). HMR can significantly speed up development by updating browser content automatically (without page reload) after changes are made in the source code. It also allows you to retain the state of the application. Just override the `start` method with a `state` parameter.
 
 {% code title="main.kt" %}
 ```kotlin
