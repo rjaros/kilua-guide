@@ -10,10 +10,10 @@ fun IComponent.mobileMenu(className: String) {
     nav(className, "mobile-menu") {
         ul {
             li {
-                link("#features", "Features")
+                a("#features", "Features")
             }
             li {
-                link("#learning", "Learning")
+                a("#learning", "Learning")
             }
         }
     }
