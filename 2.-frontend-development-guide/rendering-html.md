@@ -5,8 +5,6 @@
 Kilua provides many functions to render all standard HTML tags. Almost all of them have names directly corresponding to tag names. The exceptions are these HTML tags:
 
 * `<input>`, which can be rendered using many different functions, dedicated for different types of inputs (e.g. text, checkbox, radiobutton, upload, color etc.)
-* &#x20;`<a>`, rendered with a `link()` function (in my opinion `a()` is not very convenient name for one of the most important functions)
-* `<link>`, rendered with a `linkTag()` function (to avoid clash with the above)
 * `<map>`,  rendered with a `mapTag()` function (to avoid clash with Kotlin maps)
 * `<object>`,  rendered with an  `objectTag()` function (to avoid clash with Kotlin `object` keyword)
 * `<var>`, rendered with a `varTag()` function (to avoid clash with Kotlin `var` keyword)
@@ -29,7 +27,7 @@ Most HTML attributes are optional, but for some HTML tags they are almost always
 
 ```kotlin
 div {
-    link("https://kotlinlang.org/", target = "_blank") {
+    a("https://kotlinlang.org/", target = "_blank") {
         img("img/kotlin.png", alt = "Kotlin")
     }
 }
@@ -38,7 +36,7 @@ div {
 Some attributes can only by used with functions inside the component body.
 
 ```kotlin
-link("/logout", icon = "bi bi-box-arrow-right") {
+a("/logout", icon = "bi bi-box-arrow-right") {
     title("Logout")
     ariaLabel("Logout")
 }
