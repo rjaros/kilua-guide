@@ -13,7 +13,7 @@ fun main() {
         BootstrapCssModule,
         FontAwesomeModule,
         TomSelectModule,
-        CoreModule
+        CoreModule // always used as the last initializer
     )
 }
 ```
