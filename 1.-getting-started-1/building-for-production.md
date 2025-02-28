@@ -9,4 +9,4 @@ gradlew.bat clean jsBrowserDistribution                 (Js target on Windows)
 gradlew.bat clean wasmJsBrowserDistribution             (WasmJs target on Windows)
 ```
 
-The application files will be generated in the `build/dist/js/productionExecutable` or `build/dist/wasmJs/productionExecutable` directory
+The application files will be generated in the `build/dist/js/productionExecutable` or `build/dist/wasmJs/productionExecutable` directory.
