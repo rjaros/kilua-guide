@@ -104,7 +104,7 @@ When creating fullstack or SSR apps with additional JVM target, the `common` sou
 
 ### The Application class
 
-The main Kilua application class must extend the `dev.kilua.Application` class and override the`start` method.
+The main Kilua application class must extend the `dev.kilua.Application` class and override the`start` method. Use `startApplication`function to initialize and start your app.
 
 {% code title="App.kt" %}
 ```kotlin
