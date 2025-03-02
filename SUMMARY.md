@@ -33,6 +33,7 @@
   * [Using Bootstrap](2.-frontend-development-guide/using-bootstrap.md)
   * [Using TailwindCSS](2.-frontend-development-guide/using-tailwindcss.md)
   * [Using Tabulator](2.-frontend-development-guide/using-tabulator.md)
+  * [Animation](2.-frontend-development-guide/animation.md)
   * [Using Jetpack Compose API](2.-frontend-development-guide/using-jetpack-compose-api.md)
 * [3. Fullstack Components](3.-fullstack-components.md)
 * [Useful References](useful-references.md)
