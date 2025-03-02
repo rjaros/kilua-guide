@@ -57,12 +57,15 @@ button(className = "navbar-toggler") {
 
 ## Text content
 
-You can declare textual content of HTML tags with a `textNode()` function, which also has a convenient extension operator `+`. It can be used like this:
+You can declare textual content of HTML tags with a `textNode()` function, which also has a convenient extension operator `+`:
 
 ```kotlin
 div {
     p {
-        +"Paragraph content"
+        textNode("First paragraph")
+    }
+    p {
+        +"Second paragraph"
     }
 }
 ```
