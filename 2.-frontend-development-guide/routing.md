@@ -1,6 +1,6 @@
 # Routing
 
-Kilua has a routing module, which is a fork of the [routing-compose](https://github.com/hfhbd/routing-compose) library for Compose Web, HTML and Desktop. The `kilua-routing` module contains are two types of routers - `HashRouter` and `BrowserRouter`.&#x20;
+Kilua has a routing module, which is a fork of the [routing-compose](https://github.com/hfhbd/routing-compose) library for Compose Web, HTML and Desktop. The `kilua-routing` module contains two types of routers - `HashRouter` and `BrowserRouter`.&#x20;
 
 ## HashRouter&#x20;
 
@@ -21,6 +21,10 @@ Kilua has a routing module, which is a fork of the [routing-compose](https://git
 | Support for SSR (Server Side Rendering) |                    |
 
 All Kilua templates and example applications are already configured for use of `BrowserRouter` with webpack development. But you need to make sure your publication server is configured for History API routing. You can find some valuable information on [this page](https://router.vuejs.org/guide/essentials/history-mode#Example-Server-Configurations).
+
+## Routing configuration
+
+
 
 ## Layout based routing vs. state based routing
 
@@ -88,3 +92,7 @@ HashRouter("/") {
     }
 }
 ```
+
+{% hint style="info" %}
+You can use `BrowserRouter` the same way.
+{% endhint %}
