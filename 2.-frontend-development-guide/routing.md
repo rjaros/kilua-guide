@@ -102,3 +102,19 @@ SimpleBrowserRouter("/") {
 {% hint style="info" %}
 You can use `SimpleHashRouter` the same way.
 {% endhint %}
+
+## Accessing router instance and navigating
+
+When you declare a router in your application you will often need to navigate between different URLs in response to the occurrence of certain events (e.g. button clicks). You can do this by calling `navigate()` method of the router instance. You can use `HashRouter` or `BrowserRouter` objects directly, but if you want more universal code you can also use `Router.current` composable property or `Router.global` extension property.
+
+```kotlin
+button("Go to About page") {
+    val router = Router.current // only works inside a @Composable function
+    onClick {
+        router.navigate("/about")
+        // Router.global.navigate("/about")
+        // HashRouter.navigate("/about")
+        // BrowserRouter.navigate("/about")
+    }
+}
+```
