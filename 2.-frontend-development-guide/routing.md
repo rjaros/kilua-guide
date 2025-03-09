@@ -24,7 +24,7 @@ All Kilua templates and example applications are already configured for use of `
 
 ## Routing configuration
 
-
+A router is configured using a simple DSL with a tree-like structure. You can use `route`function to directly match a single part of URL or you can use `string`and `int`functions for more dynamic routing.
 
 ## Layout based routing vs. state based routing
 
@@ -64,7 +64,7 @@ HashRouter("/") {
 
 ### State based routing
 
-Use `routeAction()`, `stringAction()`, `intAction()`and `noMatchAction()` functions (which are convenient wrappers over more low-level `RouteEffect` function) to call some actions. The actions can be suspending, can access external resources and they should change the state of the application instead of directly rendering UI. The UI itself is rendered using standard Compose state binding.
+Instead of standard routing DSL use `routeAction()`, `stringAction()`, `intAction()`and `noMatchAction()` functions on the lowest levels of the routing tree to call some actions (thees function are convenient wrappers over more low-level `RouteEffect` function). The actions can be suspending, can access external resources and they should change the state of the application instead of directly rendering UI. The UI itself is rendered using standard Compose state binding.
 
 ```kotlin
 import app.softwork.routingcompose.HashRouter
