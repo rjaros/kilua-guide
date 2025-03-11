@@ -1,5 +1,7 @@
 # Events
 
+## DOM events
+
 Kilua allows you to listen to all the standard DOM events and also some custom events from different components. You can use dedicated functions for the most popular events:
 
 * `onClick`
@@ -56,6 +58,12 @@ div {
 }
 ```
 
+## Custom events
+
+
+
+## Non-composable context
+
 If you want to add event listeners without compose context you can use a non-composable variants of these functions with names ending with `Direct` (e.g. `onClickDirect`, `onEventDirect`). In such cases you are also responsible for removing event listeners by using `removeEventListener` method.
 
 ```kotlin
@@ -76,3 +84,6 @@ button("Remove listener") {
 ```
 
 When using `removeEventListener` method, you can give only the event name to remove all listeners for that event, but you can also pass the listener ID, returned by the `onClickDirect` method.
+
+## Suspending calls
+
