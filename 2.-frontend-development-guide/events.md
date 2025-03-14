@@ -58,9 +58,9 @@ div {
 }
 ```
 
-## Custom events
-
-
+{% hint style="info" %}
+You can also use `onEvent()` to create listeners for custom events, dispatched by some components like `Tabulator`, `TabPanel` and `SplitPanel`  or by your own code.
+{% endhint %}
 
 ## Non-composable context
 
@@ -85,5 +85,14 @@ button("Remove listener") {
 
 When using `removeEventListener` method, you can give only the event name to remove all listeners for that event, but you can also pass the listener ID, returned by the `onClickDirect` method.
 
-## Suspending calls
+## Suspending listeners
 
+You can easily use suspending functions inside most often used event handlers by using `onClickLaunch`, `onChangeLaunch` and `onInputLaunch` functions. There is also `onEventLaunch` function, which can be used for all other event types.
+
+```kotlin
+button("Sleep") {
+    onClickLaunch { 
+        delay(1.seconds) // suspending function
+    }
+}
+```
