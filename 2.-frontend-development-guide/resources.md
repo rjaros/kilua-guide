@@ -15,10 +15,10 @@ You may also need some additional processing of the resources files. You can use
 You can include CSS styles in the JS bundle without the need to manually use the `<style>` tag.&#x20;
 
 ```kotlin
-import dev.kilua.JsModule
 import dev.kilua.useModule
+import js.import.JsModule
 
-@JsModule("./modules/css/style.css")
+@JsModule("/kotlin/modules/css/style.css")
 external object styleCss : JsAny
 
 class App : Application() {
@@ -42,10 +42,10 @@ Using `@JsModule` annotation is not enough for Webpack bundler to actually impor
 Images processed by Webpack will be copied to the destination folder with hashed names. Use `LocalResource` helper class to access the proper URL of the image.&#x20;
 
 ```kotlin
-import dev.kilua.JsModule
 import dev.kilua.LocalResource
+import js.import.JsModule
 
-@JsModule("./modules/img/cat.jpg")
+@JsModule("/kotlin/modules/img/cat.jpg")
 external object catJpg : LocalResource
 
 class App : Application() {
@@ -66,23 +66,23 @@ class App : Application() {
 You can use JSON data files directly in your application. Use `LocalResource` helper class to access the content of the file.&#x20;
 
 ```kotlin
-import dev.kilua.JsModule
 import dev.kilua.LocalResource
-import dev.kilua.externals.console
-import dev.kilua.externals.get
+import dev.kilua.utils.jsGet
+import js.import.JsModule
+import web.console.console
 
 /* The content of the test.json file:
 {
   "property1": "Lorem Ipsum"
 }
 */
-@JsModule("./modules/json/test.json")
+@JsModule("/kotlin/modules/json/test.json")
 external object testJson : LocalResource
 
 class App : Application() {
 
     override fun start() {
-        console.log(testJson.content["property1"])
+        console.log(testJson.content.jsGet("property1"))
 
         root("root") {
         }
