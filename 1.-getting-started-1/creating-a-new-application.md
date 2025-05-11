@@ -10,9 +10,9 @@ The template uses Gradle version catalog. All plugins and dependencies are liste
 
 ```toml
 [versions]
-kilua = "0.0.20"
-kotlin = "2.1.20-RC"
-compose = "1.8.0-alpha03"
+kilua = "0.0.24"
+kotlin = "2.2.0-Beta1"
+compose = "1.8.0-rc01"
 
 [libraries]
 kilua = { module = "dev.kilua:kilua", version.ref = "kilua" }
@@ -57,6 +57,9 @@ kotlin {
             }
         }
         binaries.executable()
+        compilerOptions {
+            target.set("es2015")
+        }
     }
     wasmJs {
         useEsModules()
@@ -72,6 +75,9 @@ kotlin {
             }
         }
         binaries.executable()
+        compilerOptions {
+            target.set("es2015")
+        }
     }
     sourceSets {
         val commonMain by getting {
