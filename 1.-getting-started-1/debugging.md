@@ -14,4 +14,4 @@ Note: Source maps are disabled by default in all Kilua template projects, becaus
 
 ### Console.log
 
-Some UI interactions may be tricky to handle with a debugger, and so being able to fall back to console logging is useful. When developing in common code, you can't import and access native `kotlin.js.console` object. You can use `dev.kilua.externals.console` object instead.
+Some UI interactions may be tricky to handle with a debugger, and so being able to fall back to console logging is useful. When developing in common code, you can't import and access native `kotlin.js.console` object. You can use `web.console.console` object, declared in `kotlin-wrappers` instead.
