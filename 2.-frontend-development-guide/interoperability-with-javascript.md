@@ -1,12 +1,12 @@
 # Interoperability with JavaScript
 
-Kilua gives you a unified way to work with JavaScript modules from the `common` code using external declarations. It gives you access to `web.JsAny` external interface, which is introduced to match `kotlin.js.JsAny` interface from Kotlin/WasmJs standard library. When using Kilua you will notice a lot of use of `web.JsAny` interface, because it's the only way to build Kotlin/WasmJs compatible code. The same applies to types such as `JsArray`, `JsString`, `JsNumber` of even `JsBoolean`, which are just aliases for standard types in Js target but are totally different in WasmJs.
+Kilua and kotlin-wrappers bindings give you a unified way to work with JavaScript modules from the `common` code using external declarations. It gives you access to `js.core.JsAny` external interface, which is introduced to match `kotlin.js.JsAny` interface from Kotlin/WasmJs standard library. When using Kilua you will notice a lot of use of `js.core.JsAny` interface, because it's the only way to build Kotlin/WasmJs compatible code. The same applies to types such as `JsArray`, `JsString`, `JsNumber` and `JsBoolean`, which are just aliases for standard types in Js target but are totally different in WasmJs.
 
-When declaring your own external wrapper types, always extend `web.JsAny` to make sure your externals will be compatible with WasmJs target.
+When declaring your own external wrapper types, always extend `js.core.JsAny` to make sure your externals will be compatible with WasmJs target.
 
 ## Dynamic typing
 
-Sometimes, especially when migrating code written for Kotlin/Js, you might want to use some `dynamic` types. Unfortunately `dynamic` is not supported in Kotlin/Wasm and also not available in Kilua. Instead you should use `JsAny`, and use extension operators defined in Kilua for map-like string indexing. For instance instead of writing this Kotlin/Js code:
+Sometimes, especially when migrating code written for Kotlin/Js, you might want to use some `dynamic` types. Unfortunately `dynamic` is not supported in Kotlin/Wasm and also not available in Kilua. Instead you should use `JsAny`, and use extension functions `jsGet` and `jsSet` defined in Kilua. For instance instead of writing this Kotlin/Js code:
 
 ```kotlin
 val someObject: dynamic = someFunction()
@@ -18,8 +18,8 @@ someObject.property3 = "Some value"
 
 ```kotlin
 val someObject: JsAny = someFunction()
-console.log(someObject["property1"]!!["property2"])
-someObject["property3"] = "Some value".toJsString()
+console.log(someObject.jsGet("property1")!!.jsGet("property2"))
+someObject.jsSet("property3", "Some value".toJsString())
 ```
 
 ## Native JavaScript objects
@@ -60,12 +60,12 @@ The `toJsAny()` extension and `jsObjectOf()` function support all basic Kotlin t
 
 ## Importing modules and resources
 
-Kilua applications are developed with `useEsModules()` configuration option to support ECMAScript modules. If you have worked with some other Kotlin/JS frameworks before, you might be familiar with the `require()` function, but Kilua configuration doesn't allow you to use it for importing modules. Instead you should use `@JsModule` annotation, which is also available as `dev.kilua.JsModule` for use in the common sources set. This annotation is used both for external NPM modules and local resources (like CSS files, images or translation files).
+Kilua applications are developed with `useEsModules()` configuration option to support ECMAScript modules. If you have worked with some other Kotlin/JS frameworks before, you might be familiar with the `require()` function, but Kilua configuration doesn't allow you to use it for importing modules. Instead you should use `@JsModule` annotation, which is also available as `js.import.JsModule` for use in the common sources set. This annotation is used both for external NPM modules and local resources (like CSS files, images or translation files).
 
 This is how you can use an example NPM module (JQuery):
 
 ```kotlin
-import dev.kilua.JsModule
+import js.import.JsModule
 
 external interface JQueryStatic: JsAny {
     fun ajax(settings: JsAny)
