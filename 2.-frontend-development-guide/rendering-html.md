@@ -70,7 +70,7 @@ div {
 }
 ```
 
-For some often used cases Kilua defines dedicated functions (by adding `t` to the name), which take the text content as the first parameter - these are: `bt()`, `divt()`, `emt()`, `h1t()`, `h2t()`, `h3t()`, `h4t()`, `h5t()`, `h6t()`, `it()`, `lit()`, `pt()`, `pret()`, `st()`, `smallt()`, `spant()`, `strongt()`, `subt()`, `supt()`, `ut()`.
+For some often used cases Kilua defines dedicated functions (by adding `t` to the name), which take the text content as the first parameter - these are: `bt()`, `divt()`, `emt()`, `h1t()`, `h2t()`, `h3t()`, `h4t()`, `h5t()`, `h6t()`, `it()`, `lit()`, `pt()`, `pret()`, `st()`, `smallt()`, `spant()`, `strongt()`, `subt()`, `supt()`, `ut()`, `tdt()`, `tht()`.
 
 ```kotlin
 div {
