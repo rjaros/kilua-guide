@@ -12,9 +12,9 @@ The template uses Gradle version catalog. All plugins and dependencies are liste
 
 ```toml
 [versions]
-kilua = "0.0.24"
-kotlin = "2.2.0-Beta1"
-compose = "1.8.0-rc01"
+kilua = "0.0.25"
+kotlin = "2.2.0-RC"
+compose = "1.8.1"
 
 [libraries]
 kilua = { module = "dev.kilua:kilua", version.ref = "kilua" }
