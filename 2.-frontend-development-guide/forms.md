@@ -349,7 +349,7 @@ form<LoginForm> {
 
 ## Custom type fields
 
-Form data model doesn't support custom types out of the box, but it's possible to add support for your own type as long as you can use this type to and from a `String`.
+Form data model doesn't support custom types out of the box, but it's possible to add support for your own type as long as you can convert this type to and from a `String`.
 
 Define a custom class for your model. It needs a `toString()` method to convert its data to the `String` value used within a form and should be serializable with a custom serializer.
 
@@ -368,12 +368,12 @@ object ObjectIdSerializer : KSerializer<ObjectId> {
         return ObjectId(str.toInt())
     }
     override fun serialize(encoder: Encoder, value: ObjectId) {
-        encoder.encodeString(value.id.toString())
+        encoder.encodeString(value.toString())
     }
 }
 ```
 
-Now you can use this class within your model.
+Now you can use this class within your data model.
 
 ```kotlin
 @Serializable
