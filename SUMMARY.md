@@ -24,7 +24,6 @@
   * [Layout containers](2.-frontend-development-guide/layout-containers.md)
   * [Events](2.-frontend-development-guide/events.md)
   * [Forms](2.-frontend-development-guide/forms.md)
-  * [Form controls](2.-frontend-development-guide/form-controls.md)
   * [SVG images](2.-frontend-development-guide/svg-images.md)
   * [Drag and drop](2.-frontend-development-guide/drag-and-drop.md)
   * [Internationalization](2.-frontend-development-guide/internationalization.md)
