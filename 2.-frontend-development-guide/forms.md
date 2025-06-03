@@ -179,8 +179,7 @@ form<LoginForm> {
 
 And finally we can add some flexbox styling to make the form more visually appealing:
 
-```kotlin
-form<LoginForm> {
+<pre class="language-kotlin"><code class="lang-kotlin">form&#x3C;LoginForm> {
     vPanel(gap = 5.px) {
         maxWidth(400.px)
         hPanel(justifyContent = JustifyContent.SpaceBetween, gap = 15.px) {
@@ -210,6 +209,140 @@ form<LoginForm> {
                     println("Login data: ${this@form.getData()}")
                 }
             }
+        }
+    }
+<strong>    LaunchedEffect(Unit) {
+</strong>        this@form.setData(LoginForm(rememberMe = true))
+    }
+}
+</code></pre>
+
+## Form validation
+
+Kilua forms support validation for single fields and for the form as a whole. You can easily mark some fields as required using `required = true` parameter. You can specify validation functions and error messages for single fields using `bindWithValidationMessage` method instead of simple `bind`. You can also set `validator` function for the whole form and check the relationships between different fields. Finally you can validate the form with the `validate()` method:
+
+```kotlin
+form<LoginForm> {
+    vPanel(gap = 5.px) {
+        maxWidth(400.px)
+        hPanel(justifyContent = JustifyContent.SpaceBetween, gap = 15.px) {
+            fieldWithLabel("Username") {
+                bindWithValidationMessage(LoginForm::username) {
+                    (it.value != null && it.value!!.length <= 20) to "Maximum length is 20 characters"
+                }
+            }
+        }
+        hPanel(justifyContent = JustifyContent.SpaceBetween, gap = 15.px) {
+            fieldWithLabel("Password") {
+                password(id = it, required = true) {
+                    bind(LoginForm::password)
+                }
+            }
+        }
+        hPanel(justifyContent = JustifyContent.Start, gap = 5.px) {
+            fieldWithLabel("Remember me", labelAfter = true) {
+                checkBox(id = it) {
+                    bind(LoginForm::rememberMe)
+                }
+            }
+        }
+        hPanel(justifyContent = JustifyContent.Center) {
+            button("Login") {
+                onClick {
+                    if (this@form.validate()) {
+                        println("Login data: ${this@form.getData()}")
+                    }
+                }
+            }
+        }
+    }
+    validator = {
+        if (this[LoginForm::username] == this[LoginForm::password]) {
+            it.copy(isInvalid = true, invalidMessage = "Don't use the same username and password")
+        } else {
+            it
+        }
+    }
+    LaunchedEffect(Unit) {
+        this@form.setData(LoginForm(rememberMe = true))
+    }
+}
+```
+
+The results of the validation process are not displayed automatically. Instead they are collected in the `Validation` object, which can be accessed with `validationStateFlow` property of the form component. You can use `validationStateFlow.collectAsState()` to handle validation as standard compose state. It's up to you how to display the collected validation data. This is only an example:
+
+```kotlin
+form<LoginForm> {
+    val validation by validationStateFlow.collectAsState()
+
+    vPanel(gap = 5.px) {
+        if (validation.isInvalid && validation.invalidMessage != null) {
+            div {
+                color(Color.Red)
+                +validation.invalidMessage!!
+            }
+        }
+        maxWidth(400.px)
+        hPanel(justifyContent = JustifyContent.SpaceBetween, gap = 15.px) {
+            fieldWithLabel("Username") {
+                text(id = it, required = true) {
+                    bindWithValidationMessage(LoginForm::username) {
+                        (it.value != null && it.value!!.length <= 20) to "Maximum length is 20 characters"
+                    }
+                }
+            }
+        }
+        val validationUsername = validation[LoginForm::username]
+        if (validationUsername?.isInvalid == true || validationUsername?.isEmptyWhenRequired == true) {
+            div {
+                color(Color.Red)
+                if (validationUsername.isEmptyWhenRequired) {
+                    +"Username is required"
+                } else if (validationUsername.invalidMessage != null) {
+                    +validationUsername.invalidMessage!!
+                }
+            }
+        }
+        hPanel(justifyContent = JustifyContent.SpaceBetween, gap = 15.px) {
+            fieldWithLabel("Password") {
+                password(id = it, required = true) {
+                    bind(LoginForm::password)
+                }
+            }
+        }
+        val validationPassword = validation[LoginForm::password]
+        if (validationPassword?.isInvalid == true || validationPassword?.isEmptyWhenRequired == true) {
+            div {
+                color(Color.Red)
+                if (validationPassword.isEmptyWhenRequired) {
+                    +"Password is required"
+                } else if (validationPassword.invalidMessage != null) {
+                    +validationPassword.invalidMessage!!
+                }
+            }
+        }
+        hPanel(justifyContent = JustifyContent.Start, gap = 5.px) {
+            fieldWithLabel("Remember me", labelAfter = true) {
+                checkBox(id = it) {
+                    bind(LoginForm::rememberMe)
+                }
+            }
+        }
+        hPanel(justifyContent = JustifyContent.Center) {
+            button("Login") {
+                onClick {
+                    if (this@form.validate()) {
+                        println("Login data: ${this@form.getData()}")
+                    }
+                }
+            }
+        }
+    }
+    validator = {
+        if (this[LoginForm::username] == this[LoginForm::password]) {
+            it.copy(isInvalid = true, invalidMessage = "Don't use the same username and password")
+        } else {
+            it
         }
     }
     LaunchedEffect(Unit) {
