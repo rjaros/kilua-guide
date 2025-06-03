@@ -32,10 +32,6 @@ data class FormModel(
 Note: When defining form data model you need to make sure all the fields have default values.
 {% endhint %}
 
-## Dynamic forms
-
-Sometimes it's not possible to know the data model of the form because the fields need to be added and/or removed dynamically. For such use cases Kilua allows you to model your data with a `Map<String, Any?>` type. The values are still strictly typed, but you need to use casting to access the correct type of data. &#x20;
-
 ## From controls
 
 Kilua comes with a bunch of built-in or modular form composables for many different types of form data:
@@ -44,9 +40,9 @@ Kilua comes with a bunch of built-in or modular form composables for many differ
 
 ## Creating a form
 
-To create a form just use a `form` composable function. It can be used with a type parameter for static data model (a data class) or without it to use a dynamic model (`Map<String, Any?>`).
+To create a form just use a `form` composable function, using a type parameter for static data model.
 
-Let's build an example login form, with two standard fields and additional "remember me" checkbox. We will use strict data model:
+Let's build an example login form, with two standard fields and additional "remember me" checkbox. We will use this data model class:
 
 ```kotlin
 @Serializable
@@ -347,6 +343,77 @@ form<LoginForm> {
     }
     LaunchedEffect(Unit) {
         this@form.setData(LoginForm(rememberMe = true))
+    }
+}
+```
+
+## Custom type fields
+
+Form data model doesn't support custom types out of the box, but it's possible to add support for your own type as long as you can use this type to and from a `String`.
+
+Define a custom class for your model. It needs a `toString()` method to convert its data to the `String` value used within a form and should be serializable with a custom serializer.
+
+```kotlin
+@Serializable(with = ObjectIdSerializer::class)
+class ObjectId(val id: Int) {
+    override fun toString(): String {
+        return "$id"
+    }
+}
+
+object ObjectIdSerializer : KSerializer<ObjectId> {
+    override val descriptor: SerialDescriptor = buildClassSerialDescriptor("com.example.ObjectId")
+    override fun deserialize(decoder: Decoder): ObjectId {
+        val str = decoder.decodeString()
+        return ObjectId(str.toInt())
+    }
+    override fun serialize(encoder: Encoder, value: ObjectId) {
+        encoder.encodeString(value.id.toString())
+    }
+}
+```
+
+Now you can use this class within your model.
+
+```kotlin
+@Serializable
+data class Form(
+    val text: String? = null,
+    val password: String? = null,
+    val objectId: ObjectId? = null
+)
+```
+
+When creating a form, you can use any control based on `String` data type and use `bindCustom` method to create data binding.
+
+```kotlin
+text {
+    bindCustom(Form::objectId)
+}
+```
+
+## Dynamic forms
+
+Sometimes it's not possible to know the data model of the form because the fields need to be added and/or removed dynamically. For such use cases Kilua allows you to model your data with a `Map<String, Any?>` type. The values are still strictly typed, but you need to use casting to access the correct type of data. To create a dynamic form just use `form` composable without any type parameter and create bindings using plain string identifiers:
+
+```kotlin
+form {
+    fieldWithLabel("Username") {
+        text(id = it) {
+            bind("username")
+        }
+    }
+    fieldWithLabel("Password") {
+        password(id = it) {
+            bind("password")
+        }
+    }
+    button("Login") {
+        onClick {
+            val map = this@form.getData()
+            println("Username: ${map["username"]}")
+            println("Password: ${map["password"]}")
+        }
     }
 }
 ```
