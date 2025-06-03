@@ -2,7 +2,9 @@
 
 ## Creating a new application
 
-To create a new application just copy the [template project](https://github.com/rjaros/kilua/tree/main/templates/template) and modify it by adding modules.
+The recommended way to create a new application is to use [Kilua Project Wizard](https://plugins.jetbrains.com/plugin/27530-kilua-project-wizard) plugin for IntelliJ IDEA. Just install the plugin from JetBrains Marketplace in your IDE and run `File -> New -> Project...` from the main menu. Choose `Kilua` group, select desired project type, choose options and optional modules from the list on the first page. On the second page choose your project name and location. Your project will be generated and opened in IDE when you click `Finish` button. After a few moments required to download all required dependencies you are ready to go.
+
+You can also just copy the [template project](https://github.com/rjaros/kilua/tree/main/templates/template) and modify it by adding modules.
 
 ### gradle/libs.versions.toml
 
