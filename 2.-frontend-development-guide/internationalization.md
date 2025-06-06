@@ -51,9 +51,9 @@ gettext {
 ```
 {% endcode %}
 
-## Using multi-language text in application sources <a href="#using-multi-language-text-in-application-sources" id="using-multi-language-text-in-application-sources"></a>
+## Using multi-language text in the application sources <a href="#using-multi-language-text-in-application-sources" id="using-multi-language-text-in-application-sources"></a>
 
-To mark some text for translation use one of the methods of the `dev.kilua.i18n.I18n` class instead of plain string literals. You can start with an empty instance of the class.
+To mark some text for translation use one of the methods of the `dev.kilua.i18n.I18n` class instead of plain string literals. You can start your work with an empty instance of the class.
 
 ```kotlin
 import dev.kilua.i18n.I18n
@@ -65,7 +65,9 @@ There are a few different methods in the `I18n` class, which can be used for sin
 
 <table><thead><tr><th width="187">Method</th><th>Description</th></tr></thead><tbody><tr><td><code>tr()</code></td><td>Translate a singular form</td></tr><tr><td><code>trn()</code></td><td>Translate plural forms</td></tr><tr><td><code>trc()</code></td><td>Translate a singular form with a given context</td></tr><tr><td><code>trnc()</code></td><td>Translate plural forms with a given context</td></tr><tr><td><code>marktr()</code></td><td>Mark text for translation</td></tr></tbody></table>
 
-These methods are `@Composable` , and they are bound to the application locale. When the locale changes, all methods using translated texts are recomposed. This is an example of multi-language code with singular and plural forms.
+These methods are `@Composable` , and they are bound to the application current locale. When the locale changes, all methods using translated texts are recomposed.&#x20;
+
+This is an example of multi-language code with singular and plural forms.
 
 ```kotlin
 div {
@@ -83,7 +85,7 @@ Note: You can use `{{ }}`  operators to substitute named values.
 
 ## Translation files
 
-The whole idea of ​​gettext translations is that the translation key is the actual text in the primary language. Until you create and initialize translation files for some other language, your application will use string literals used in the source code. It's probably a good practice to use English literals in your code and other languages in the translation files.
+The whole idea of ​​gettext translations is that the translation key is the actual text in the primary language. Until you create and initialize translation files for some other language, your application will work correctly just by using string literals used in the source code. It's probably a good practice to use English literals in your code and other languages in the translation files.
 
 To generate basic translation files run the command:
 
@@ -93,12 +95,6 @@ gradlew.bat gettext                              (on Windows)
 ```
 
 This command will search your sources for any usages of internationalization methods (`tr` or others) and generate a `messages.pot` file in the `src/commonMain/resources/modules/i18n` directory. This file is the base for your translations. For any language you would like to support, copy the `messages.pot` file to `messages-XX.po`, where XX is a country code (en, de, es, fr etc.). These files should be translated according to the [PO format specification](https://www.gnu.org/software/gettext/manual/html_node/PO-Files.html). You can use many popular tools for editing PO files to simplify the translation process.
-
-{% hint style="info" %}
-You should correctly set Language and Plural-Forms headers of your PO files.
-{% endhint %}
-
-After adding some new texts to your sources you can call the `./gradlew gettext` task to refresh the `messages.pot` file. You can then use the [`msgmerge`](https://www.gnu.org/software/gettext/manual/html_node/msgmerge-Invocation.html) tool from the GNU gettext package to merge new keys with existing translation files. You can also add new `msgid` and `msgstr` lines to your translation files manually.
 
 {% code title="messages-pl.po" %}
 ```gettext
@@ -132,6 +128,12 @@ msgstr[1] "{{name}} ma {{count}} samochody"
 msgstr[2] "{{name}} ma {{count}} samochodów"
 ```
 {% endcode %}
+
+{% hint style="info" %}
+You should correctly set Language and Plural-Forms headers of your PO files.
+{% endhint %}
+
+After adding some new texts to your sources you can call the `./gradlew gettext` task again to refresh the `messages.pot` file. You can then use the [`msgmerge`](https://www.gnu.org/software/gettext/manual/html_node/msgmerge-Invocation.html) tool from the GNU gettext package to merge new keys with existing translation files. You can also add new `msgid` and `msgstr` lines to your translation files manually.
 
 ## Initializing translations
 
