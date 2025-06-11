@@ -139,4 +139,45 @@ tabPanel {
 }
 ```
 
-You can also allow to reorder tabs with drag & drop using `draggableTabs = true` parameter. Similar to closing, the result of the D\&D operation is a `moveTab` event, which should be processed by your code and change the state used to define tabs order.
+You can also allow to reorder tabs with drag & drop using `draggableTabs = true` parameter. Similar to closing, the result of the D\&D operation is a `moveTab` event, which should be processed by your code and result in a change of the state used to define tabs order.
+
+```kotlin
+external class MoveInfo : JsAny {
+    val from: Int
+    val to: Int
+}
+
+val tabs = mutableStateListOf<Triple<String, String, @Composable IComponent.() -> Unit>>(
+    Triple("Apple", "fab fa-apple", {
+        div {
+            +"Apple description"
+        }
+    }), Triple("Google", "fab fa-google", {
+        div {
+            +"Google description"
+        }
+    }), Triple("Microsoft", "fab fa-microsoft", {
+        div {
+            +"Microsoft description"
+        }
+    })
+)
+
+tabPanel(draggableTabs = true) {
+    tabs.forEach { (title, icon, content) ->
+        tab(title, icon) {
+            content()
+        }
+    }
+    onEvent<CustomEvent<*>>("moveTab") {
+        val info = parse<MoveInfo>(it.detail.toString())
+        if (info.from < info.to) {
+            tabs.add(info.to + 1, tabs[info.from])
+            tabs.removeAt(info.from)
+        } else {
+            tabs.add(info.to, tabs[info.from])
+            tabs.removeAt(info.from + 1)
+        }
+    }
+}
+```
