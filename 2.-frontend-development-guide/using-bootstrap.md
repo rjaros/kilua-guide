@@ -138,3 +138,5 @@ tabPanel {
     }
 }
 ```
+
+You can also allow to reorder tabs with drag & drop using `draggableTabs = true` parameter. Similar to closing, the result of the D\&D operation is a `moveTab` event, which should be processed by your code and change the state used to define tabs order.
