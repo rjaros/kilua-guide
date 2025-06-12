@@ -181,3 +181,43 @@ tabPanel(draggableTabs = true) {
     }
 }
 ```
+
+### Offcanvas
+
+Bootstrap offcanvas is a sidebar component that can be toggled to appear from the left, right, top, or bottom edge of the viewport.
+
+```kts
+val offcanvas = offcanvasRef("Some caption") {
+    p {
+        +"This is an offcanvas example."
+    }
+}
+button("Open offcanvas") {
+    onClick {
+        offcanvas.show()
+    }
+}
+```
+
+You can use additional parameters of the composable function to customize offcanvas placement, responsiveness, closing, scrolling and backdrop usage.
+
+```kotlin
+val offcanvas = offcanvasRef(
+    "Some caption",
+    placement = OffPlacement.OffcanvasEnd,
+    responsiveType = OffResponsiveType.OffcanvasLg,
+    closeButton = false,
+    bodyScrolling = true,
+    backdrop = false,
+    escape = false,
+) {
+    p {
+        +"This is an offcanvas example."
+    }
+}
+button("Toggle offcanvas", className = "d-lg-none") {
+    onClick {
+        offcanvas.toggle()
+    }
+}
+```
