@@ -258,7 +258,7 @@ accordion(flush = true, alwaysOpen = true, openedIndex = 1) {
 
 ### Carousel
 
-Bootstrap carousel component allows you to cycle through elements - images or slides of text.
+Bootstrap carousel component allows you to cycle through its children elements.
 
 ```kotlin
 carousel {
@@ -283,4 +283,37 @@ carousel {
 }
 ```
 
-You can use additional parameters of the composable function to customize carousel behaviour.
+You can use additional parameters of the composable function to customize carousel behaviour. You can also use component reference to control carousel playback.
+
+```kotlin
+val carousel = carouselRef(fade = true, autoPlay = true, interval = 1000) {
+    item("First slide", "First slide label") {
+        div("d-block w-100") {
+            height(200.px)
+            background(Color.Red)
+        }
+    }
+    item("Second slide", "Second slide label") {
+        div("d-block w-100") {
+            height(200.px)
+            background(Color.Green)
+        }
+    }
+    item("Third slide", "Third slide label") {
+        div("d-block w-100") {
+            height(200.px)
+            background(Color.Blue)
+        }
+    }
+}
+button("Play") {
+    onClick {
+        carousel.cycle()
+    }
+}
+button("Pause") {
+    onClick {
+        carousel.pause()
+    }
+}
+```
