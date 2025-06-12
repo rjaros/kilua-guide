@@ -221,3 +221,37 @@ button("Toggle offcanvas", className = "d-lg-none") {
     }
 }
 ```
+
+### Accordion
+
+Bootstrap accordion component allows you to create vertically collapsing panels with various content. &#x20;
+
+```kotlin
+accordion {
+    item("Google", "fab fa-google") {
+        +"Google is a technology company that specializes in Internet-related services and products."
+    }
+    item("Apple", "fab fa-apple") {
+        +"Apple Inc. is a technology company that designs, manufactures, and markets consumer electronics, computer software, and online services."
+    }
+    item("Microsoft", "fab fa-microsoft") {
+        +"Microsoft Corporation is a technology company that produces computer software, consumer electronics, personal computers, and related services."
+    }
+}
+```
+
+You can use additional parameters of the composable function to customize accordion behaviour.
+
+```kotlin
+accordion(flush = true, alwaysOpen = true, openedIndex = 1) {
+    item("Google", "fab fa-google") {
+        +"Google is a technology company that specializes in Internet-related services and products."
+    }
+    item("Apple", "fab fa-apple") {
+        +"Apple Inc. is a technology company that designs, manufactures, and markets consumer electronics, computer software, and online services."
+    }
+    item("Microsoft", "fab fa-microsoft") {
+        +"Microsoft Corporation is a technology company that produces computer software, consumer electronics, personal computers, and related services."
+    }
+}
+```
