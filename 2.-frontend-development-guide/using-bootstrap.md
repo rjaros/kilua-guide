@@ -255,3 +255,32 @@ accordion(flush = true, alwaysOpen = true, openedIndex = 1) {
     }
 }
 ```
+
+### Carousel
+
+Bootstrap carousel component allows you to cycle through elements - images or slides of text.
+
+```kotlin
+carousel {
+    item("First slide", "First slide label") {
+        div("d-block w-100") {
+            height(200.px)
+            background(Color.Red)
+        }
+    }
+    item("Second slide", "Second slide label") {
+        div("d-block w-100") {
+            height(200.px)
+            background(Color.Green)
+        }
+    }
+    item("Third slide", "Third slide label") {
+        div("d-block w-100") {
+            height(200.px)
+            background(Color.Blue)
+        }
+    }
+}
+```
+
+You can use additional parameters of the composable function to customize carousel behaviour.
