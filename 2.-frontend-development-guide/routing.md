@@ -1,6 +1,8 @@
 # Routing
 
-Kilua has a routing module, which is a fork of the [routing-compose](https://github.com/hfhbd/routing-compose) library for Compose Web, HTML and Desktop. The `kilua-routing` module contains two types of routers - `HashRouter` and `BrowserRouter`.&#x20;
+Kilua has a routing module, which is a fork of the [routing-compose](https://github.com/hfhbd/routing-compose) library for Compose Web, HTML and Desktop. It is possible to directly use the API of the original library, but Kilua provides a dedicated DSL to declare routing compatible with both frontend and server side rendering.&#x20;
+
+The `kilua-routing` module contains two types of routers - `HashRouter` and `BrowserRouter`.&#x20;
 
 ## HashRouter&#x20;
 
@@ -24,35 +26,41 @@ All Kilua templates and example applications are already configured for use of `
 
 ## Routing configuration
 
-Both `HashRouter` and `BrowserRouter` are singleton objects. You can initialize and configure the chosen router by using `SimpleHashRouter` or `SimpleBrowserRouter` composable functions.&#x20;
+Both `HashRouter` and `BrowserRouter` are singleton objects. You can initialize and configure the chosen router by using `hashRouter` or `browserRouter` composable functions.&#x20;
 
-A router is configured using a simple DSL with a tree-like structure. You can use `route` function to directly match a single part of the URL or you can use `string` and `int`  functions for more dynamic routing. There is also a `noMatch` function to capture all routes not declared earlier.
+A router is configured using a simple DSL with a tree-like structure. You can use `route` function to directly match a single part of the URL or you can use `string` and `int`  functions for more dynamic routing.
 
 ```kotlin
-SimpleBrowserRouter("/") {
+browserRouter {
     route("/") {
-        p {
-            +"Home"
+        view {
+            p {
+                +"Welcome"
+            }
         }
     }
     route("/article") {
-        int { articleId ->
-            p {
-                +"Article: $articleId"
+        int {
+            view { articleId ->
+                p {
+                    +"Article: $articleId"
+                }
             }
         }
-        noMatch {
+        view {
             p {
                 +"Article ID not specified"
             }
         }
     }
     route("/about") {
-        p {
-            +"About"
+        view {
+            p {
+                +"About"
+            }
         }
     }
-    noMatch {
+    view {
         p {
             +"Not found"
         }
@@ -64,44 +72,138 @@ SimpleBrowserRouter("/") {
 
 When using routing in your application you most often treat the URL as a kind of data source. Sometimes, with simpler apps, this data can be used directly to render the UI (like in the example above). But more complex applications also use different sources of data and probably keep their internal state in some type of store (e.g. Compose `MutableState` or coroutines `StateFlow`). In such cases it might be desirable to map the URL changes to the state changes (and then render the UI based on the state and not the URL itself).&#x20;
 
-Kilua lets you work with this kind of routing configuration by using `routeAction()`, `stringAction()`, `intAction()`and `noMatchAction()` functions on the lowest levels of the routing tree to call some actions. The actions can be suspending, can access external resources and they should change the state of the application instead of directly rendering UI. The UI itself is rendered using standard Compose state binding.
-
-{% hint style="info" %}
-&#x20;These function are wrappers over more low-level `RouteEffect` function.
-{% endhint %}
+Kilua lets you work with this kind of routing configuration by using `action {}` blocks instead of `view {}` . The actions can be suspending, can access external resources and they should change the state of the application instead of directly rendering UI. The UI itself is rendered using standard Compose state binding.
 
 ```kotlin
-SimpleBrowserRouter("/") {
+var state by remember { mutableStateOf("Home") }
 
-    var state by remember { mutableStateOf("Home") }
-
-    p {
-        +state
+browserRouter {
+    defaultContent {
+        p {
+            +state
+        }
     }
-
-    routeAction("/") {
-        state = "Home"
+    route("/") {
+        action {
+            state = "Welcome"
+        }
     }
     route("/article") {
-        intAction { articleId ->
-            state = "Article: $articleId"
+        int {
+            action { articleId ->
+                state = "Article: $articleId"
+            }
         }
-        noMatchAction {
+        action {
             state = "Article ID not specified"
         }
     }
-    routeAction("/about") {
-        state = "About"
+    route("/about") {
+        action {
+            state = "About"
+        }
     }
-    noMatchAction {
+    action {
         state = "Not found"
     }
 }
 ```
 
 {% hint style="info" %}
-You can use `SimpleHashRouter` the same way.
+You can use `hashRouter` the same way.
 {% endhint %}
+
+## Accessing path parameters
+
+Kilua routing DSL is a mix of static and dynamic calls. The `route {}` , `string {}` and `int {}` blocks are executed statically, when the routing is defined. On the other hand `view {}` and `action {}` blocks are executed dynamically, when the current navigation path matches the given routing definition. That's why you can access path parameters only inside `view` and `action` blocks. The values are passed directly, when using `string` or `int` blocks, or can be accessed with a help of a routing context object providing `parameters` and `remainingPath` properties.
+
+```kotlin
+browserRouter { ctx ->
+    route("/article") {
+        int { ctxA ->
+            action { articleId ->
+                state = "Article: $articleId"
+                console.log("Current parameters: ${ctxA.parameters}")
+            }
+        }
+        action {
+            state = "Article ID not specified"
+        }
+    }
+    route("/about") { ctxB ->
+        action {
+            state = "About"
+            console.log("Current parameters: ${ctxB.parameters}")
+        }
+    }
+    action {
+        state = "Not found"
+        console.log("Remaining path: ${ctx.remainingPath}")
+    }
+}
+```
+
+## Providing metadata
+
+For every declared route you can provide additional metadata. Even though it was designed primarily for server side rendering of the `<meta>` tags, you can also use this feature to enhance your routing tree data model. You can use `defaultMeta` block at the top level and `meta {}` or `meta { view {} }` blocks for every single route.
+
+```kotlin
+var state by remember { mutableStateOf("Home") }
+
+browserRouter {
+    defaultContent {
+        p {
+            +state
+        }
+    }
+    defaultMeta {
+        titleTemplate = "% - My page"
+        description = "The description of my home page"
+        keywords = listOf("home", "page")
+    }
+    route("/") {
+        action {
+            state = "Welcome"
+        }
+        meta {
+            title = "Home"
+        }
+    }
+    route("/article") {
+        int { ctx ->
+            action { articleId ->
+                state = "Article: $articleId"
+            }
+            meta {
+                view {
+                    title = "${ctx.value}"
+                }
+            }
+        }
+        action {
+            state = "Article ID not specified"
+        }
+        meta {
+            title = "404"
+            description = "Article not found"
+        }
+    }
+    route("/about") {
+        action {
+            state = "About"
+        }
+        meta {
+            title = "About"
+        }
+    }
+    action {
+        state = "Not found"
+    }
+    meta {
+        title = "404"
+    }
+}
+```
 
 ## Accessing router instance and navigating
 
@@ -118,3 +220,6 @@ button("Go to About page") {
     }
 }
 ```
+
+## Accessing routing tree model
+
