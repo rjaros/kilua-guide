@@ -223,3 +223,4 @@ button("Go to About page") {
 
 ## Accessing routing tree model
 
+The routing tree model created with Kilua routing DSL can be accessed at any time with `RoutingModel.global` property. It contains the instance of the `RoutingModel` class - a tree structure containing all declared routes and metadata. You can use this model e.g. to build some kind of navigation UI.
