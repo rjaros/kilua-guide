@@ -140,10 +140,10 @@ After adding some new texts to your sources you can call the `./gradlew gettext`
 To initialize translations for one or more languages, you need to pass the translation files as constructor parameters of the `I18n` class.
 
 ```kotlin
-@JsModule("/kotlin/modules/i18n/messages-en.po")
+@JsModule("./modules/i18n/messages-en.po")
 external object messagesEn: JsAny
 
-@JsModule("/kotlin/modules/i18n/messages-pl.po")
+@JsModule("./modules/i18n/messages-pl.po")
 external object messagesPl: JsAny
 
 val i18n = I18n(

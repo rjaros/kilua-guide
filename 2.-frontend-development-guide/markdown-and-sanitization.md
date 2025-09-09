@@ -4,7 +4,7 @@
 
 Kilua support for markdown code is based on the lightweight and fast [Marked](https://marked.js.org/) library and you need to add `kilua-marked` module to your dependencies to use it. The module provides a `parseMarkdown()` function, which takes markdown code and returns HTML code. Optionally you can pass a `MarkedOptions` instance to customize rendering (check[ Marked options documentation](https://marked.js.org/using_advanced#options) for details). To actually render the HTML you can use `rawHtml` or `rawHtmlBlock` composables.
 
-<pre class="language-kts"><code class="lang-kts">@JsModule("/kotlin/help.md")
+<pre class="language-kts"><code class="lang-kts">@JsModule("./help.md")
 external object HelpMd : LocalResource
 
 <strong>div {

@@ -16,9 +16,9 @@ You can include CSS styles in the JS bundle without the need to manually use the
 
 ```kotlin
 import dev.kilua.useModule
-import js.import.JsModule
+import kotlin.js.JsModule
 
-@JsModule("/kotlin/modules/css/style.css")
+@JsModule("./modules/css/style.css")
 external object styleCss : JsAny
 
 class App : Application() {
@@ -43,9 +43,9 @@ Images processed by Webpack will be copied to the destination folder with hashed
 
 ```kotlin
 import dev.kilua.LocalResource
-import js.import.JsModule
+import kotlin.js.JsModule
 
-@JsModule("/kotlin/modules/img/cat.jpg")
+@JsModule("./modules/img/cat.jpg")
 external object catJpg : LocalResource
 
 class App : Application() {
@@ -68,7 +68,7 @@ You can use JSON data files directly in your application. Use `LocalResource` he
 ```kotlin
 import dev.kilua.LocalResource
 import dev.kilua.utils.jsGet
-import js.import.JsModule
+import kotlin.js.JsModule
 import web.console.console
 
 /* The content of the test.json file:
@@ -76,7 +76,7 @@ import web.console.console
   "property1": "Lorem Ipsum"
 }
 */
-@JsModule("/kotlin/modules/json/test.json")
+@JsModule("./modules/json/test.json")
 external object testJson : LocalResource
 
 class App : Application() {

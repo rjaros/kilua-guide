@@ -60,12 +60,12 @@ The `toJsAny()` extension and `jsObjectOf()` function support all basic Kotlin t
 
 ## Importing modules and resources
 
-Kilua applications are developed with `useEsModules()` configuration option to support ECMAScript modules. If you have worked with some other Kotlin/JS frameworks before, you might be familiar with the `require()` function, but Kilua configuration doesn't allow you to use it for importing modules. Instead you should use `@JsModule` annotation, which is also available as `js.import.JsModule` for use in the common sources set. This annotation is used both for external NPM modules and local resources (like CSS files, images or translation files).
+Kilua applications are developed with `useEsModules()` configuration option to support ECMAScript modules. If you have worked with some other Kotlin/JS frameworks before, you might be familiar with the `require()` function, but Kilua configuration doesn't allow you to use it for importing modules. Instead you should use `@JsModule` annotation, which is also available as `kotlin.js.JsModule` for use in the common sources set. This annotation is used both for external NPM modules and local resources (like CSS files, images or translation files).
 
 This is how you can use an example NPM module (JQuery):
 
 ```kotlin
-import js.import.JsModule
+import kotlin.js.JsModule
 
 external interface JQueryStatic: JsAny {
     fun ajax(settings: JsAny)
