@@ -12,9 +12,9 @@ The template uses Gradle version catalog. All plugins and dependencies are liste
 
 ```toml
 [versions]
-kilua = "0.0.26"
-kotlin = "2.2.0"
-compose = "1.9.0-alpha03"
+kilua = "0.0.27"
+kotlin = "2.2.20-RC2"
+compose = "1.10.0-alpha01"
 
 [libraries]
 kilua = { module = "dev.kilua:kilua", version.ref = "kilua" }
@@ -49,6 +49,9 @@ kotlin {
         useEsModules()
         browser {
             commonWebpackConfig {
+                cssSupport {
+                    enabled = true
+                }
                 outputFileName = "main.bundle.js"
                 sourceMaps = false
             }
@@ -67,6 +70,9 @@ kotlin {
         useEsModules()
         browser {
             commonWebpackConfig {
+                cssSupport {
+                    enabled = true
+                }
                 outputFileName = "main.bundle.js"
                 sourceMaps = false
             }
@@ -87,14 +93,6 @@ kotlin {
                 implementation(libs.kilua)
             }
         }
-        val jsMain by getting {
-            dependencies {
-            }
-        }
-        val wasmJsMain by getting {
-            dependencies {
-            }
-        }
     }
 }
 ```
@@ -107,7 +105,7 @@ As Kilua apps can be compiled to both Kotlin/Js and Kotlin/WasmJs targets, the s
 Test sources are contained in the `src/commonTest` directory.
 
 {% hint style="info" %}
-When creating fullstack or SSR apps with additional JVM target, the `common` source set can't be used for the fronted code. It is recommended to create a custom, shared `webMain` source set.
+When creating fullstack or SSR apps with additional JVM target, the `common` source set can't be used for the fronted code. You can use shared `webMain` source set instead.
 {% endhint %}
 
 ### The Application class
