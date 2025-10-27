@@ -1,8 +1,8 @@
 # Interoperability with JavaScript
 
-Kilua and kotlin-wrappers bindings give you a unified way to work with JavaScript modules from the `common` code using external declarations. It gives you access to `js.core.JsAny` external interface, which is introduced to match `kotlin.js.JsAny` interface from Kotlin/WasmJs standard library. When using Kilua you will notice a lot of use of `js.core.JsAny` interface, because it's the only way to build Kotlin/WasmJs compatible code. The same applies to types such as `JsArray`, `JsString`, `JsNumber` and `JsBoolean`, which are just aliases for standard types in Js target but are totally different in WasmJs.
+Kilua and kotlin-wrappers bindings give you a unified way to work with JavaScript modules from the `common` code using external declarations. It gives you access to `kotlin.js.JsAny` interface from Kotlin/WasmJs standard library. When using Kilua you will notice a lot of use of `JsAny` interface, because it's the only way to build Kotlin/WasmJs compatible code. The same applies to types such as `JsArray`, `JsString`, `JsNumber` and `JsBoolean`, which are just aliases for standard types in Js target but are totally different in WasmJs.
 
-When declaring your own external wrapper types, always extend `js.core.JsAny` to make sure your externals are compatible with WasmJs target.
+When declaring your own external wrapper types, always extend `JsAny` to make sure your externals are compatible with WasmJs target.
 
 ## Dynamic typing
 
