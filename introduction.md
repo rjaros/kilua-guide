@@ -28,6 +28,7 @@ Kilua gives you a lot of ready to use GUI components, which can be used as build
 * optional Jetpack-like API including `Modifier`, `Box`, `Row` and `Column`
 * animation module powered by CSS and [Motion](https://motion.dev/) library
 * interactive maps powered by [Leaflet](https://leafletjs.com/) library
+* Kotlin based templates powered by [Ktml](https://github.com/ktool-dev/ktml) engine
 * built-in support for [Font Awesome](https://fontawesome.com/) icons
 * built-in support for [Bootstrap Icons](https://icons.getbootstrap.com/)
 
